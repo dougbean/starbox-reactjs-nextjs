@@ -7,6 +7,7 @@ const DrinkButton = ({ drink, setMessage }) => {
   //const fetchItemById = useContext(ApiContext); //todo: remove, I think. 
   
   var setMyMessage = (drinkItem) => {    
+    //console.log(drinkItem)
     if(drinkItem.name === null)
         {
            var msg = `Your order of ${drink.name} is not available.`

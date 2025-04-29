@@ -3,7 +3,7 @@ import React from 'react';
 import {fetchItemById, updateData} from "../../components/ApiService";
 import { use, useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+//import 'react-toastify/dist/ReactToastify.css'; //this is moved to the layout page.
 
 // const displayMessage = (toast) => {
 //   toast.success('Item updated successfully!');
