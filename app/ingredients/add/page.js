@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import {createData} from "../../components/ApiService";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const IngredientForm = () => {
     //use state for the form//

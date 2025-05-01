@@ -37,6 +37,7 @@ const DrinksRecipe = () => {
           <tr>
             <th>Beverage Name</th>
             <th>Recipe</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
