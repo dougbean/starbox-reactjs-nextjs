@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
-import {fetchItemById, updateData} from "../../components/ApiService"; //todo: remove fetchItemById
-import { use, useState, useEffect } from 'react';
+import {updateData} from "../../components/ApiService"; 
+import {useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
 const handleSubmit = (event) => {
@@ -26,18 +26,11 @@ const handleSubmit = (event) => {
     );    
 };
 
-//I dont' think I need to pass the id as a parameter, now that I'm passing the whole ingredient object.
-//todo: add an edit folder, copy the code from here and remove the [id] folder and content.
-const IngredientForm = ({ params } ) => {    
-    
+const IngredientForm = () => {        
     const searchParams = useSearchParams()
-    const ingredientData = JSON.parse(searchParams.get('data'));
-    console.log(ingredientData);     
-  
-    const paramsValue = use(params); //params is a promise, so we need to 'use' it.//{"id":"12"}
-    console.log(paramsValue);
-    //initialize with empty ingredient.    
-    //const [formData, setFormData] = useState({id: 0, name: '', unitCost: 0, quantity: 0, amount: 0});
+    const ingredientData = JSON.parse(atob(searchParams.get('data'))); // decode the base64 string
+    console.log(ingredientData); 
+       
     const [formData, setFormData] = useState(ingredientData);
 
     const handleChange = (e) => {   
@@ -47,25 +40,9 @@ const IngredientForm = ({ params } ) => {
       setFormData(prevState => ({
         ...prevState,
         [name]: value
-      }));
-
-      console.log(formData); 
+      }));      
     };
-
-    // var setItem = (item) => {    
-    //   if(item.name === null)
-    //       {
-    //          var msg = `Your order of ${drink.name} is not available.`
-    //       }else{
-    //         console.log(item);
-    //       }   
-    // }
-
-    //COMMENT OUT GETTING DRINK FROM DATABASE.
-   /*  var url = `https://localhost:7070/api/ingredients/${paramsValue.id}`; //todo: get base url from config   
-    console.log(url)    
-    useEffect(() => {fetchItemById(url, setFormData)}, []);  */
- 
+   
     return (    
       <>
       <form id="ingredientForm"  onSubmit={handleSubmit} className="container mt-4">

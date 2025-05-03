@@ -7,7 +7,27 @@ const IngredientRow = ({ ingredient, handleClick }) => {
         <td>{ingredient.name}</td>
         <td>{ingredient.unitCost}</td>
         <td>{ingredient.amount}</td> 
-        <td><Link href={`/ingredients/${ingredient.id}`}>Edit</Link></td>        
+        {/* <td><Link href={`/ingredients/${ingredient.id}`}>Edit</Link></td>         */}
+        <td>
+        <Link 
+                href={{
+                    pathname: `/ingredients/${ingredient.id}`,
+                    query: { data: JSON.stringify(ingredient) }
+                }}
+            >
+                Edit
+            </Link>             
+        </td>
+        <td>
+        <Link 
+                href={{
+                    pathname: `/ingredients/edit`,
+                    query: { data: btoa(JSON.stringify(ingredient)) }
+                }}
+            >
+              New Edit Page
+            </Link>             
+        </td>
         <td>
           <button className="btn btn-outline-primary" onClick={() => handleClick(ingredient.id)}>
             Delete

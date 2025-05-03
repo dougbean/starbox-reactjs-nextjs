@@ -68,8 +68,17 @@ const DrinkRow = ({ drink}) => {
       <td>{drink.name}</td>     
         <td>
           <div>{recipes}</div>
-        </td> 
-        <td><Link href={`/drinks/${drink.id}`}>Edit</Link></td>           
+        </td>       
+        <td>
+        <Link 
+                href={{
+                    pathname: `/drinks/edit`,
+                    query: { data: btoa(JSON.stringify(drink)) }
+                }}
+            >
+              New Edit Page
+            </Link>             
+        </td>    
     </tr>
   );
 }
