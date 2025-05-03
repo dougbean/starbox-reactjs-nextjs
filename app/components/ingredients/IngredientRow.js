@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+//todo: pass the ingredient, not just the id to the edit page, to avoid a trip to the database.
 const IngredientRow = ({ ingredient, handleClick }) => {
     return (
     <tr key={ingredient.id}>

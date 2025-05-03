@@ -3,14 +3,9 @@ import React from 'react';
 import {fetchItemById, updateData} from "../../components/ApiService";
 import { use, useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css'; //this is moved to the layout page.
-
-// const displayMessage = (toast) => {
-//   toast.success('Item updated successfully!');
-// }
 
 const handleSubmit = (event) => {
-    event.preventDefault(); //WHY IS THIS HERE?
+    event.preventDefault(); 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     console.log('Form submitted:', data);
@@ -32,7 +27,7 @@ const handleSubmit = (event) => {
 
 //Handling Controlled and Uncontrolled Inputs in React
 //https://dommagnifi.co/2023-04-05-controlled-and-uncontrolled-inputs/
-//the id has to come from a link and this page has to be a dynamic page.
+//todo pass the ingredient object and avoid a trip to the database.
 const IngredientForm = ({ params } ) => {  
     const paramsValue = use(params); //params is a promise, so we need to 'use' it.//{"id":"12"}
     console.log(paramsValue);
