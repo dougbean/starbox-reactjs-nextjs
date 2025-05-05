@@ -59,20 +59,25 @@ const AddDrink = () => {
     const handleSubmit = (event) => {
       event.preventDefault();   
       console.log('Form submitted:', formData);   
+      //add validation//
+      //todo replace all vars with const in react and angular projects.
+      const { ingredients } = formData;
+      console.log(ingredients); 
+      //add validation//
         // Call the API to add the drink
         const url = 'https://localhost:7070/api/Drinks'; // todo: get base url from config
-        createData(url, formData).then(
-        function(value) {
-            console.log(value);
-            toast.success('Item created successfully!');
-            //reset form
-            setFormData({id: 0, name: '', price: 0, ingredients: []});
-        },
-        function(error) {        
-            console.log(error);   
-            toast.error("error occurred creating ingredient.");   
-        }
-      );  
+      //   createData(url, formData).then(
+      //   function(value) {
+      //       console.log(value);
+      //       toast.success('Item created successfully!');
+      //       //reset form
+      //       setFormData({id: 0, name: '', price: 0, ingredients: []});
+      //   },
+      //   function(error) {        
+      //       console.log(error);   
+      //       toast.error("error occurred creating ingredient.");   
+      //   }
+      // );  
     };
 
     return (    

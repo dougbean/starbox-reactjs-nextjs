@@ -76,7 +76,7 @@ const DrinkRow = ({ drink}) => {
                     query: { data: btoa(JSON.stringify(drink)) }
                 }}
             >
-              New Edit Page
+              Edit
             </Link>             
         </td>    
     </tr>

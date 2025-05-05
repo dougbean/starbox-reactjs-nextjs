@@ -3,9 +3,7 @@ import IngredientRow from "./IngredientRow";
 const IngredientTable = ({ ingredients, handleClick }) => {
     const rows = []; 
    
-    ingredients.forEach((ingredient) => {   
-        //console.log(ingredient);  
-      
+    ingredients.forEach((ingredient) => {                
         rows.push(
           <IngredientRow
               ingredient={ingredient}
