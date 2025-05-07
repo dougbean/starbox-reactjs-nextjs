@@ -19,7 +19,7 @@ export default function Page() {
     return <LoadingIndicator loadingState={loadingState} />;
   }
 
-  //I need to pass this as a prop
+  //todo: add message for error that may occur when tring to delete ingredient that has constraint - used by a drink.
   const handleClick = (id) => {
     console.log('executing handleClick...')
     console.log(id)
