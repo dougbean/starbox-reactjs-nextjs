@@ -1,16 +1,15 @@
 "use client";
 import React from 'react';
-import {fetchItemById, updateData} from "../../components/ApiService";
+import {updateData} from "../../components/ApiService";
 import { useSearchParams } from 'next/navigation';
 import { use, useState, useEffect } from 'react';
 import useIngredients from "../../hooks/useIngredients";
 import loadingStatus from "../../helpers/loadingStatus";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import { ToastContainer, toast } from 'react-toastify';
+import Utils from "../../helpers/Utils";
 
-const DrinkForm = () => {  
-    // const paramsValue = use(params); //params is a promise, so we need to 'use' it.//{"id":"12"}
-    // console.log(paramsValue);
+const DrinkForm = () => {      
 
     const searchParams = useSearchParams()
     const drinkData = JSON.parse(atob(searchParams.get('data'))); // decode the base64 string

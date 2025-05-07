@@ -6,6 +6,7 @@ import useIngredients from "../../hooks/useIngredients";
 import loadingStatus from "../../helpers/loadingStatus";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import ShowMessage from "../../components/ShowMessage";
+import Utils from "../../helpers/Utils";
 
 const AddDrink = () => {  
     const [formData, setFormData] = useState({id: 0, name: '', price: 0, ingredients: []});
@@ -61,43 +62,43 @@ const AddDrink = () => {
         setFormData(updatedFormData);
       };
             
-      const checkIngredientSelections = (selectedIngredients) => {
-        let areSelectionsValid = true;
+      // const checkIngredientSelections = (selectedIngredients) => {
+      //   let areSelectionsValid = true;
         
-        selectedIngredients.forEach(function (item) {
-          if (item.id === '') {            
-            areSelectionsValid = false;           
-          }
-        });
-        return areSelectionsValid;
-      }
+      //   selectedIngredients.forEach(function (item) {
+      //     if (item.id === '') {            
+      //       areSelectionsValid = false;           
+      //     }
+      //   });
+      //   return areSelectionsValid;
+      // }
 
-      const getDuplicatedIngredients = (selectedIngredients) => {
-        const seen = new Set();
-        const duplicates = new Set();             
+      // const getDuplicatedIngredients = (selectedIngredients) => {
+      //   const seen = new Set();
+      //   const duplicates = new Set();             
 
-        selectedIngredients.forEach(function(item) {            
-            if (seen.has(item.id)) {              
-              duplicates.add(item.id.toString());
-            } else {
-              seen.add(item.id.toString());        
-            }     
-          })
+      //   selectedIngredients.forEach(function(item) {            
+      //       if (seen.has(item.id)) {              
+      //         duplicates.add(item.id.toString());
+      //       } else {
+      //         seen.add(item.id.toString());        
+      //       }     
+      //     })
 
-          return [...duplicates]; 
-       } 
+      //     return [...duplicates]; 
+      //  } 
 
-      const checkIngredientsForDuplicates = (selectedIngredients) => {
-          let hasDuplicates = false;
-          let dupes = getDuplicatedIngredients(selectedIngredients);
-          console.log(dupes);
+      // const checkIngredientsForDuplicates = (selectedIngredients) => {
+      //     let hasDuplicates = false;
+      //     let dupes = getDuplicatedIngredients(selectedIngredients);
+      //     console.log(dupes);
       
-          const isEmpty = dupes.length === 0; // true
-          if (!isEmpty) {
-            hasDuplicates = true;
-          } 
-          return hasDuplicates;
-      }
+      //     const isEmpty = dupes.length === 0; // true
+      //     if (!isEmpty) {
+      //       hasDuplicates = true;
+      //     } 
+      //     return hasDuplicates;
+      // }
     
     const handleSubmit = (event) => {
       event.preventDefault();   
@@ -107,11 +108,10 @@ const AddDrink = () => {
       //todo replace all vars with const in react and angular projects.
       //const { ingredients } = formData;
       const { ingredients: selectedIngredients } = formData; 
-      console.log('log ingredients...')
+      console.log('log selected ingredients...')
       console.log(selectedIngredients); 
       
-      if(selectedIngredients.length === 0){
-        console.log('empty ingredient array');
+      if(selectedIngredients.length === 0){       
         setMessage('one ingredient is required.');
         return;
       }
@@ -126,14 +126,14 @@ const AddDrink = () => {
       //   }
       // })
 
-      let areSelectionsValid = checkIngredientSelections(selectedIngredients);
+      let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
 
       if(!areSelectionsValid){
         setMessage('Ingredient selection is not valid.');        
         return;
       }
 
-      const hasDuplicates = checkIngredientsForDuplicates(selectedIngredients);
+      const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
       if(hasDuplicates){     
         setMessage('You have a duplicate ingredient selection. Please change one.');  
         return;
