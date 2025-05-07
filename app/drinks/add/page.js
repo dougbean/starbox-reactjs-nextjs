@@ -108,85 +108,81 @@ const AddDrink = () => {
     };
 
     return (    
-       <>   
-        <form id="drinkForm" onSubmit={handleSubmit} className="container mt-4">
-        <h2 className="mb-4">Add Drink</h2>
+       <>  
+        <div className="container">  
+          <form id="drinkForm" onSubmit={handleSubmit} className="container mt-4">
+          <h2 className="mb-4">Add Drink</h2>
 
-        <div className="row mb-3">
-            <div className="col-md-6">
-            <label htmlFor="name" className="form-label">Name:</label>
-            <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="form-control"
-            />
-            </div>
-            <div className="col-md-6 d-flex align-items-end">
-            <button type="button" onClick={addControlPair} className="btn btn-secondary">
-                Add Ingredient
-            </button>
-            </div>
-        </div>
+          <div className="row mb-3">
+              <div className="col-md-6">
+              <label htmlFor="name" className="form-label">Name:</label>
+              <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="form-control"
+              />
+              </div>
+              <div className="col-md-6 d-flex align-items-end">
+              <button type="button" onClick={addControlPair} className="btn btn-secondary">
+                  Add Ingredient
+              </button>
+              </div>
+          </div>
 
-        {formData.ingredients.map((control, index) => (
-            <div className="row mb-2" key={index}>
-            <div className="col-md-5">
-                <select
-                className="form-select"
-                value={control.id}
-                onChange={(e) => handleDropdownChange(index, e)}
-                >
-                <option value="">Select an ingredient</option>
-                {ingredients.map((option, i) => (
-                    <option key={i} value={option.id}>
-                    {option.name}
-                    </option>
-                ))}
-                </select>
-            </div>
-            <div className="col-md-4">
-                <input
-                type="number"
-                className="form-control"
-                value={control.text}
-                onChange={(e) => handleTextChange(index, e)}
-                placeholder="Enter a quantity"
-                required
-                min="0"
-                />
-            </div>
-            <div className="col-md-3">
-                <button
-                type="button"
-                onClick={() => removeControlPair(index)}
-                className="btn btn-danger"
-                >
-                Remove
-                </button>
-            </div>
-            </div>
-        ))}
+          {formData.ingredients.map((control, index) => (
+              <div className="row mb-2" key={index}>
+              <div className="col-md-5">
+                  <select
+                  className="form-select"
+                  value={control.id}
+                  onChange={(e) => handleDropdownChange(index, e)}
+                  >
+                  <option value="">Select an ingredient</option>
+                  {ingredients.map((option, i) => (
+                      <option key={i} value={option.id}>
+                      {option.name}
+                      </option>
+                  ))}
+                  </select>
+              </div>
+              <div className="col-md-4">
+                  <input
+                  type="number"
+                  className="form-control"
+                  value={control.text}
+                  onChange={(e) => handleTextChange(index, e)}
+                  placeholder="Enter a quantity"
+                  required
+                  min="0"
+                  />
+              </div>
+              <div className="col-md-3">
+                  <button
+                  type="button"
+                  onClick={() => removeControlPair(index)}
+                  className="btn btn-danger"
+                  >
+                  Remove
+                  </button>
+              </div>
+              </div>
+          ))}
 
-        <div className="row">
-            <div className="col-md-12">
-            <pre>{JSON.stringify(formData.ingredients, null, 2)}</pre>
-            </div>
-        </div>
-
-        <div className="row mt-3">
-            <div className="col-md-6">
-            <button type="submit" className="btn btn-primary">Submit</button>
-            </div>
-        </div>        
-        {message && ( <ShowMessage message={message}/> )}     
-        </form>        
-         <ToastContainer />
+          <div className="row mt-3">
+              <div className="col-md-6">
+              <button type="submit" className="btn btn-primary">Submit</button>
+              </div>
+          </div>        
+          {message && ( <ShowMessage message={message}/> )}     
+          </form>        
+          <ToastContainer />
+         </div>
        </>
-  );
+    );
 };
 
 export default AddDrink;

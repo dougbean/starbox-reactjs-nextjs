@@ -6,7 +6,7 @@ const Header = () => {
       <header className="container">
         <div className="row align-items-center mb-3">
           <div className="col-md-5">
-              <h1>Starbox</h1>
+              <h1>Welcome to Starbox!</h1>
           </div>
           <div className="col-md-7 text-md-end">
             <nav>

@@ -1,7 +1,11 @@
 const Footer = () => {    
     return (     
-        <div>
-          <p>Starbox LLC</p>     
+        <div className="container">         
+          <div className="row">              
+              <div className="col-md-12">
+              <p>Starbox LLC</p>     
+              </div>
+            </div>
         </div>        
       );
 };

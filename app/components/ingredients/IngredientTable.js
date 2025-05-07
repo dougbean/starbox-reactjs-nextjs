@@ -14,18 +14,27 @@ const IngredientTable = ({ ingredients, handleClick }) => {
       });
       
       return (
-        <table className="table table-striped">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>UnitCost</th>
-                <th>Amount</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>{rows}</tbody>
-        </table>
+        <>
+         <div className="container">  
+            <div className="row">              
+              <div className="col-md-12">
+                <h2>Ingredients</h2>
+              </div>
+            </div>
+            <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>UnitCost</th>
+                    <th>Amount</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+            </table>
+          </div>
+        </>
       );
   }
 

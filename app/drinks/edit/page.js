@@ -112,7 +112,8 @@ const DrinkForm = () => {
     };   
  
     return (    
-       <>   
+       <>  
+        <div className="container"> 
               <form id="drinkForm" onSubmit={handleSubmit} className="container mt-4">
               <h2 className="mb-4">Edit Drink</h2>
       
@@ -175,12 +176,6 @@ const DrinkForm = () => {
                   </div>
               ))}
       
-              <div className="row">
-                  <div className="col-md-12">
-                  <pre>{JSON.stringify(formData.ingredients, null, 2)}</pre>
-                  </div>
-              </div>
-      
               <div className="row mt-3">
                   <div className="col-md-6">
                   <button type="submit" className="btn btn-primary">Submit</button>
@@ -189,7 +184,8 @@ const DrinkForm = () => {
               {message && ( <ShowMessage message={message}/> )}     
               </form>             
                <ToastContainer />
-             </>
+        </div>
+    </>
   );
 };
 

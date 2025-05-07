@@ -20,7 +20,7 @@ export default function Page() {
   }
 
   //I need to pass this as a prop
-  function handleClick(id) {
+  const handleClick = (id) => {
     console.log('executing handleClick...')
     console.log(id)
     var url = `https://localhost:7070/api/Ingredients/${id}`;   
@@ -31,7 +31,8 @@ export default function Page() {
       },
       function(error) {        
         //console.log(error);   
-        toast.error("error occurred deleting item.");   
+        let message = "Error occurred deleting item. Ingredient used by a drink can't be deleted."
+        toast.error(message);   
       }
     );             
   } 
@@ -65,19 +66,19 @@ export default function Page() {
     ); 
   };
 
-  function handleReloadButtonClick() {
+  const handleReloadButtonClick = () => {
     location.reload();    
   } 
 
   return  (
     <>  
-    <div>     
+    <div >     
          <IngredientTable 
           ingredients={ingredients}    
           handleClick={handleClick}                  
         />  
     </div>
-    <div className="container">
+    <div className="container">     
       <form onSubmit={handleSubmit}>
           <div className="row mb-3">
               <div className="col-md-4">
