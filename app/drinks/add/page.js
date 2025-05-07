@@ -62,51 +62,12 @@ const AddDrink = () => {
         setFormData(updatedFormData);
       };
             
-      // const checkIngredientSelections = (selectedIngredients) => {
-      //   let areSelectionsValid = true;
-        
-      //   selectedIngredients.forEach(function (item) {
-      //     if (item.id === '') {            
-      //       areSelectionsValid = false;           
-      //     }
-      //   });
-      //   return areSelectionsValid;
-      // }
-
-      // const getDuplicatedIngredients = (selectedIngredients) => {
-      //   const seen = new Set();
-      //   const duplicates = new Set();             
-
-      //   selectedIngredients.forEach(function(item) {            
-      //       if (seen.has(item.id)) {              
-      //         duplicates.add(item.id.toString());
-      //       } else {
-      //         seen.add(item.id.toString());        
-      //       }     
-      //     })
-
-      //     return [...duplicates]; 
-      //  } 
-
-      // const checkIngredientsForDuplicates = (selectedIngredients) => {
-      //     let hasDuplicates = false;
-      //     let dupes = getDuplicatedIngredients(selectedIngredients);
-      //     console.log(dupes);
-      
-      //     const isEmpty = dupes.length === 0; // true
-      //     if (!isEmpty) {
-      //       hasDuplicates = true;
-      //     } 
-      //     return hasDuplicates;
-      // }
+     
     
     const handleSubmit = (event) => {
       event.preventDefault();   
-      console.log('Form submitted:', formData);   
-      //add validation//
-      //todo: I need the validation in the edit drink page too.
-      //todo replace all vars with const in react and angular projects.
-      //const { ingredients } = formData;
+      
+      //add validation//     
       const { ingredients: selectedIngredients } = formData; 
       console.log('log selected ingredients...')
       console.log(selectedIngredients); 
@@ -114,17 +75,7 @@ const AddDrink = () => {
       if(selectedIngredients.length === 0){       
         setMessage('one ingredient is required.');
         return;
-      }
-
-      //todo: extract this to a method...
-      // let areSelectionsValid = true;
-      // ingredients.forEach(function(item) {
-      //   if(item.id === ''){
-      //     console.log('invalid selection...');
-      //     areSelectionsValid = false;
-      //     setMessage('Ingredient selection is not valid.');        
-      //   }
-      // })
+      }      
 
       let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
 
@@ -230,8 +181,7 @@ const AddDrink = () => {
             <div className="col-md-6">
             <button type="submit" className="btn btn-primary">Submit</button>
             </div>
-        </div>
-        
+        </div>        
         {message && ( <ShowMessage message={message}/> )}     
         </form>        
          <ToastContainer />

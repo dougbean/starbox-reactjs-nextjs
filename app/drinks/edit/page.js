@@ -2,11 +2,12 @@
 import React from 'react';
 import {updateData} from "../../components/ApiService";
 import { useSearchParams } from 'next/navigation';
-import { use, useState, useEffect } from 'react';
+import { useState } from 'react';
 import useIngredients from "../../hooks/useIngredients";
 import loadingStatus from "../../helpers/loadingStatus";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import { ToastContainer, toast } from 'react-toastify';
+import ShowMessage from "../../components/ShowMessage";
 import Utils from "../../helpers/Utils";
 
 const DrinkForm = () => {      
@@ -16,6 +17,7 @@ const DrinkForm = () => {
     console.log(drinkData); 
       
     const [formData, setFormData] = useState(drinkData);
+    const [message, setMessage] = useState(''); 
 
     const { ingredients, loadingState  } = useIngredients();     
 
@@ -36,6 +38,7 @@ const DrinkForm = () => {
     };  
 
     const addControlPair = () => {       
+      setMessage('')
       const updatedFormData = {...formData};      
       const { ingredients } = updatedFormData; 
       var updatedIngredients = [...ingredients, { id: "", quantity: "", name: "" }]
@@ -52,6 +55,7 @@ const DrinkForm = () => {
     };
   
     const handleDropdownChange = (index, event) => {
+      setMessage('')
       const updatedFormData = {...formData};
       const { ingredients } = updatedFormData;
       ingredients[index].id = event.target.value; 
@@ -68,13 +72,49 @@ const DrinkForm = () => {
     };
     
     const handleSubmit = (event) => {
-      event.preventDefault();
+        event.preventDefault();
+       
+        //add validation//          
+        const { ingredients: selectedIngredients } = formData;       
+            
+        if(selectedIngredients.length === 0){       
+            setMessage('one ingredient is required.');
+            return;
+        }
+      
+        let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
+      
+        if(!areSelectionsValid){
+            setMessage('Ingredient selection is not valid.');        
+            return;
+        }
+      
+        const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
+        if(hasDuplicates){     
+            setMessage('You have a duplicate ingredient selection. Please change one.');  
+            return;
+        }            
+        //add validation//
+       
+        const url = `https://localhost:7070/api/Drinks/${formData.id}`; // todo: get base url from config
+        // console.log(url)
+        // console.log(JSON.stringify(formData))
+        updateData(url, formData).then(
+            function(value) {
+            console.log(value);
+            toast.success('Item updated successfully!');
+            },
+            function(error) {        
+            console.log(error);   
+            toast.error("error occurred updating ingredient.");   
+            }
+        );    
     };   
  
     return (    
        <>   
               <form id="drinkForm" onSubmit={handleSubmit} className="container mt-4">
-              <h2 className="mb-4">Add Drink</h2>
+              <h2 className="mb-4">Edit Drink</h2>
       
               <div className="row mb-3">
                   <div className="col-md-6">
@@ -119,6 +159,8 @@ const DrinkForm = () => {
                       value={control.quantity}
                       onChange={(e) => handleTextChange(index, e)}
                       placeholder="Enter a quantity"
+                      required
+                      min="0"
                       />
                   </div>
                   <div className="col-md-3">
@@ -144,7 +186,8 @@ const DrinkForm = () => {
                   <button type="submit" className="btn btn-primary">Submit</button>
                   </div>
               </div>
-              </form>
+              {message && ( <ShowMessage message={message}/> )}     
+              </form>             
                <ToastContainer />
              </>
   );

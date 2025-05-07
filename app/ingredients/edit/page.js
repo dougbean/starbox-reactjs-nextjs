@@ -5,6 +5,7 @@ import {updateData} from "../../components/ApiService";
 import {useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
+//todo: move this to the component and use the formData directly
 const handleSubmit = (event) => {
     event.preventDefault(); 
     const formData = new FormData(event.target);
