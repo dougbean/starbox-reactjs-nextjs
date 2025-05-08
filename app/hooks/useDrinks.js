@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import loadingStatus from "../helpers/loadingStatus";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 //remember the scope is specific to the the component that uses the hook.
-const useDrinks = () => {
+const useDrinks = () => { 
     const [drinks, setDrinks] = useState([]);    
     const [loadingState, setLoadingState] = useState(loadingStatus.isLoading);  
-    
-    var url = 'https://localhost:7070/api/Drinks'; //todo: get hte base url from config file.     
+        
+    var url = `${baseUrl}/Drinks`;
     useEffect(() => {   
       setLoadingState(loadingStatus.isLoading);        
       fetch(url) 
