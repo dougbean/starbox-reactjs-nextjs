@@ -1,14 +1,9 @@
-// import { useContext } from 'react'; //todo: remove, I think.   
-// import { ApiContext } from "./ApiContext"; //todo: remove, I think.   
-import {fetchItemById, updateData} from "../../components/ApiService";
+import {fetchItem} from "../../components/ApiService";
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-const DrinkButton = ({ drink, setMessage }) => {
-  // const fetchDrinkById = useContext(ApiContext); //todo: remove 
-  //const fetchItemById = useContext(ApiContext); //todo: remove, I think. 
+const DrinkButton = ({ drink, setMessage }) => { 
   
-  var setMyMessage = (drinkItem) => {    
-    //console.log(drinkItem)
+  var setOrderMessage = (drinkItem) => {       
     if(drinkItem.name === null)
         {
            var msg = `Your order of ${drink.name} is not available.`
@@ -18,14 +13,11 @@ const DrinkButton = ({ drink, setMessage }) => {
    
     setMessage(msg);
   }
-
-  //A hook can't be used in the event handler, not direcctly anyway.
-  function handleClick() {
-      setMessage('Loading...');      
-      //var url = `https://localhost:7070/api/Drinks/${drink.id}`;   
-      const url = `${baseUrl}/Drinks/${drink.id}`;      
-      //fetchDrinkById(url, setMyMessage); //todo: remove     
-      fetchItemById(url, setMyMessage);  	
+  
+  const handleClick = () => {
+      setMessage('Loading...');           
+      const url = `${baseUrl}/Drinks/${drink.id}`;          
+      fetchItem(url, setOrderMessage);  	
   } 
 
   return (

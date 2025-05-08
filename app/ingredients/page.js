@@ -20,6 +20,7 @@ export default function Page() {
     return <LoadingIndicator loadingState={loadingState} />;
   }
 
+ 
   //todo: add message for error that may occur when tring to delete ingredient that has constraint - used by a drink.
   const handleClick = (id) => {
     console.log('executing handleClick...')
@@ -33,7 +34,7 @@ export default function Page() {
       },
       function(error) {        
         //console.log(error);   
-        let message = "Error occurred deleting item. Ingredient used by a drink can't be deleted."
+        let message = "Error occurred deleting item. You may be trying to delete an Ingredient that is used by a drink."
         toast.error(message);   
       }
     );             

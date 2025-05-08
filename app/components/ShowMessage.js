@@ -7,14 +7,7 @@ function ShowMessage({message}) {
                     <h3>{message}</h3>   
               </div>
             </div>
-        </div>        
-     {/*  <table className="table table-striped">      
-        <tbody>
-        <tr>
-          <td>{message}</td>      
-        </tr>
-        </tbody>
-      </table> */}
+        </div>             
       </>
     );
   }
