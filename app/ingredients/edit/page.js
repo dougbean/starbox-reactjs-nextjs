@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import {updateData} from "../../components/ApiService"; 
 import {useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 //todo: move this to the component and use the formData directly
 const handleSubmit = (event) => {
@@ -12,7 +13,8 @@ const handleSubmit = (event) => {
     const data = Object.fromEntries(formData.entries());
     console.log('Form submitted:', data);
     // Call the API to add the ingredient
-    const url = `https://localhost:7070/api/Ingredients/${data.id}`; // todo: get base url from config
+    //const url = `https://localhost:7070/api/Ingredients/${data.id}`; // todo: get base url from config
+    const url = `${baseUrl}/Ingredients/${data.id}`;
     console.log(url)
     console.log(JSON.stringify(data))
     updateData(url, data).then(

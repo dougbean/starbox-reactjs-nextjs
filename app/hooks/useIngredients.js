@@ -7,7 +7,7 @@ const useIngredients = () => {
     const [ingredients, setIngredients] = useState([]);    
     const [loadingState, setLoadingState] = useState(loadingStatus.isLoading);  
         
-    var url = `${baseUrl}/Ingredients`;
+    const url = `${baseUrl}/Ingredients`;
     useEffect(() => {   
       setLoadingState(loadingStatus.isLoading);        
       fetch(url) 

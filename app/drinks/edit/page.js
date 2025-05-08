@@ -9,6 +9,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import { ToastContainer, toast } from 'react-toastify';
 import ShowMessage from "../../components/ShowMessage";
 import Utils from "../../helpers/Utils";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const DrinkForm = () => {      
 
@@ -96,7 +97,8 @@ const DrinkForm = () => {
         }            
         //add validation//
        
-        const url = `https://localhost:7070/api/Drinks/${formData.id}`; // todo: get base url from config
+        //const url = `https://localhost:7070/api/Drinks/${formData.id}`; // todo: get base url from config
+        const url = `${baseUrl}/Drinks/${formData.id}`;
         // console.log(url)
         // console.log(JSON.stringify(formData))
         updateData(url, formData).then(

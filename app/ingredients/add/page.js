@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import {createData} from "../../components/ApiService";
 import { ToastContainer, toast } from 'react-toastify';
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const IngredientForm = () => {
     //use state for the form//
@@ -29,7 +30,8 @@ const IngredientForm = () => {
     event.preventDefault();   
     console.log('Form submitted:', formData);
     // Call the API to add the ingredient
-    const url = 'https://localhost:7070/api/Ingredients'; // todo: get base url from config
+    //const url = 'https://localhost:7070/api/Ingredients'; // todo: get base url from config
+    const url = `${baseUrl}/Ingredients`;
     createData(url, formData).then(
       function(value) {
         console.log(value);

@@ -5,6 +5,7 @@ import {deleteData} from "../../components/ApiService";
 import useDrinks from "../../hooks/useDrinks";
 import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const DrinksRecipe = () => {
    
@@ -25,7 +26,9 @@ const DrinksRecipe = () => {
 
    //click event for delete//
    const handleClick = (id) => {    
-    var url = `https://localhost:7070/api/Drinks/${id}`;   
+    //var url = `https://localhost:7070/api/Drinks/${id}`;   
+    const url = `${baseUrl}/Drinks/${id}`;
+    
     deleteData(url).then(
       function(value) {
         //console.log(value);

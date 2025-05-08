@@ -1,6 +1,6 @@
 //I can't use useEffect here because this is not a component or a hook. 
 
-//setItem is a callback function.
+//todo: romove this. I'm not using it anymore.
 var fetchDrinkById = (url, setItem) => {   //todo: WHAT ABOUT AN ASYNC FUNCTION?
     fetch(url)
       .then(response => response.json())
@@ -14,6 +14,7 @@ var fetchDrinkById = (url, setItem) => {   //todo: WHAT ABOUT AN ASYNC FUNCTION?
       });   
 }
 
+//todo: remove this. I'm not using it because drink and ingredient lists in their respective hooks.
 const fetchItems = async (url, setItems) => { //I haven't used this yet.
   try {
     const response = await fetch(url);
@@ -37,7 +38,6 @@ const fetchItemById = async (url, setItem) => {//I haven't used this yet.
   }
 };
 
-//rename this to createData or something like that.
 const createData = async (url = '', data = {}) => {
   try {
     const response = await fetch(url, {

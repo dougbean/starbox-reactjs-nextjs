@@ -7,6 +7,7 @@ import loadingStatus from "../../helpers/loadingStatus";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import ShowMessage from "../../components/ShowMessage";
 import Utils from "../../helpers/Utils";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const AddDrink = () => {  
     const [formData, setFormData] = useState({id: 0, name: '', price: 0, ingredients: []});
@@ -92,7 +93,8 @@ const AddDrink = () => {
       
       //add validation//
         // Call the API to add the drink
-        const url = 'https://localhost:7070/api/Drinks'; // todo: get base url from config
+        //const url = 'https://localhost:7070/api/Drinks'; // todo: get base url from config
+        const url = `${baseUrl}/Drinks`;
         createData(url, formData).then(
         function(value) {
             console.log(value);

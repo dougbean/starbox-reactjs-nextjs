@@ -7,6 +7,7 @@ import IngredientTable from "../components/ingredients/IngredientTable";
 import {deleteData, updateData} from "../components/ApiService";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function Page() { 
   const [formData, setFormData] = useState({
@@ -23,7 +24,8 @@ export default function Page() {
   const handleClick = (id) => {
     console.log('executing handleClick...')
     console.log(id)
-    var url = `https://localhost:7070/api/Ingredients/${id}`;   
+    //var url = `https://localhost:7070/api/Ingredients/${id}`;   
+    const url = `${baseUrl}/Ingredients/${id}`;
     deleteData(url).then(
       function(value) {
         //console.log(value);
@@ -52,7 +54,8 @@ export default function Page() {
     e.preventDefault(); // Prevents page reload
       
     //todo: get baseUrl from config file.
-    const url = `https://localhost:7070/api/Ingredients/update-amounts?amount=${formData.amount}`;  
+    //const url = `https://localhost:7070/api/Ingredients/update-amounts?amount=${formData.amount}`; 
+    const url = `${baseUrl}/Ingredients/update-amounts?amount=${formData.amount}`; 
     //console.log(url)    
     updateData(url, {}).then(
       function(value) {
