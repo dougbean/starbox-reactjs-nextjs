@@ -14,8 +14,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 const DrinkForm = () => {      
 
     const searchParams = useSearchParams()
-    const drinkData = JSON.parse(atob(searchParams.get('data'))); // decode the base64 string
-    console.log(drinkData); 
+    const drinkData = JSON.parse(atob(searchParams.get('data'))); // decode the base64 string   
       
     const [formData, setFormData] = useState(drinkData);
     const [message, setMessage] = useState(''); 
@@ -47,7 +46,7 @@ const DrinkForm = () => {
       setFormData(updatedFormData);   
     };    
 
-  const removeControlPair = (index) => {   
+    const removeControlPair = (index) => {   
       const updatedFormData = {...formData};
       const { ingredients } = updatedFormData;
       ingredients.splice(index,1);
@@ -75,7 +74,7 @@ const DrinkForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
        
-        //add validation//          
+        //validation//          
         const { ingredients: selectedIngredients } = formData;       
             
         if(selectedIngredients.length === 0){       
@@ -95,12 +94,9 @@ const DrinkForm = () => {
             setMessage('You have a duplicate ingredient selection. Please change one.');  
             return;
         }            
-        //add validation//
+        //validation//       
        
-        //const url = `https://localhost:7070/api/Drinks/${formData.id}`; // todo: get base url from config
-        const url = `${baseUrl}/Drinks/${formData.id}`;
-        // console.log(url)
-        // console.log(JSON.stringify(formData))
+        const url = `${baseUrl}/Drinks/${formData.id}`;    
         updateData(url, formData).then(
             function(value) {
             console.log(value);

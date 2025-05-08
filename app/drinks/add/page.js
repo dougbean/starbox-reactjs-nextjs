@@ -13,7 +13,7 @@ const AddDrink = () => {
     const [formData, setFormData] = useState({id: 0, name: '', price: 0, ingredients: []});
     const { ingredients, loadingState  } = useIngredients();  
     
-    const [message, setMessage] = useState(''); //I need a validation message  
+    const [message, setMessage] = useState(''); //validation message  
     
     if (loadingState !== loadingStatus.loaded){
         return <LoadingIndicator loadingState={loadingState} />;
@@ -36,7 +36,7 @@ const AddDrink = () => {
         var updatedIngredients = [...ingredients, { id: "", quantity: "", name: "" }]
         updatedFormData.ingredients = updatedIngredients;
         setFormData(updatedFormData);   
-      };    
+    };    
 
     const removeControlPair = (index) => {   
         const updatedFormData = {...formData};
@@ -44,56 +44,50 @@ const AddDrink = () => {
         ingredients.splice(index,1);
         updatedFormData.ingredients = ingredients; 
         setFormData(updatedFormData);
-      };
+    };
     
-      const handleDropdownChange = (index, event) => {
+    const handleDropdownChange = (index, event) => {
         setMessage('')
         const updatedFormData = {...formData};
         const { ingredients } = updatedFormData;
         ingredients[index].id = event.target.value; 
         updatedFormData.ingredients = ingredients; 
         setFormData(updatedFormData);
-      };
+    };
     
-      const handleTextChange = (index, event) => {    
+    const handleTextChange = (index, event) => {    
         const updatedFormData = {...formData};
         const { ingredients } = updatedFormData;
-        ingredients[index].quantity = event.target.value; //setting the drop down property
-        updatedFormData.ingredients = ingredients; //what about mutability here?
+        ingredients[index].quantity = event.target.value; //set the drop down property
+        updatedFormData.ingredients = ingredients; 
         setFormData(updatedFormData);
-      };
-            
-     
+    };
     
     const handleSubmit = (event) => {
-      event.preventDefault();   
+        event.preventDefault();   
       
-      //add validation//     
-      const { ingredients: selectedIngredients } = formData; 
-      console.log('log selected ingredients...')
-      console.log(selectedIngredients); 
-      
-      if(selectedIngredients.length === 0){       
-        setMessage('one ingredient is required.');
-        return;
-      }      
+        //validation//     
+        const { ingredients: selectedIngredients } = formData;       
+        
+        if(selectedIngredients.length === 0){       
+          setMessage('one ingredient is required.');
+          return;
+        }      
 
-      let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
+        let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
 
-      if(!areSelectionsValid){
-        setMessage('Ingredient selection is not valid.');        
-        return;
-      }
+        if(!areSelectionsValid){
+          setMessage('Ingredient selection is not valid.');        
+          return;
+        }
 
-      const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
-      if(hasDuplicates){     
-        setMessage('You have a duplicate ingredient selection. Please change one.');  
-        return;
-      }
-      
-      //add validation//
-        // Call the API to add the drink
-        //const url = 'https://localhost:7070/api/Drinks'; // todo: get base url from config
+        const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
+        if(hasDuplicates){     
+          setMessage('You have a duplicate ingredient selection. Please change one.');  
+          return;
+        }      
+        //validation//
+              
         const url = `${baseUrl}/Drinks`;
         createData(url, formData).then(
         function(value) {

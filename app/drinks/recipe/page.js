@@ -1,9 +1,9 @@
 'use client'
+import Link from "next/link";
 import loadingStatus from "../../helpers/loadingStatus";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import {deleteData} from "../../components/ApiService";
 import useDrinks from "../../hooks/useDrinks";
-import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -24,23 +24,19 @@ const DrinksRecipe = () => {
       );  
   }  
 
-   //click event for delete//
-   const handleClick = (id) => {    
-    //var url = `https://localhost:7070/api/Drinks/${id}`;   
+   //click event for delete
+   const handleClick = (id) => {       
     const url = `${baseUrl}/Drinks/${id}`;
     
     deleteData(url).then(
-      function(value) {
-        //console.log(value);       
+      function(value) {              
         toast.success('Item deleted successfully!');
       },
-      function(error) {        
-        //console.log(error);   
+      function(error) {                  
         toast.error("error occurred deleting item.");   
       }
     );             
-  } 
-  //click event for delete//
+  }  
 
   const handleReloadButtonClick = () => {
     location.reload();    
