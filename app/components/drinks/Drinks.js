@@ -1,10 +1,10 @@
 import { useState} from 'react'; 
-import { MessageContext } from "./MessageContext";
+import { MessageContext } from "../MessageContext";
 import DrinkTable from "./DrinkTable";
-import ShowMessage from "./ShowMessage";
-import loadingStatus from "../helpers/loadingStatus";
-import LoadingIndicator from "./LoadingIndicator";
-import useDrinks from "../hooks/useDrinks";
+import ShowMessage from "../ShowMessage";
+import loadingStatus from "../../helpers/loadingStatus";
+import LoadingIndicator from "../LoadingIndicator";
+import useDrinks from "../../hooks/useDrinks";
 
 const Drinks = () => {
     const [message, setMessage] = useState('');     

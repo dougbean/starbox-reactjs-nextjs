@@ -1,6 +1,6 @@
 
 import { useContext  } from 'react';
-import { MessageContext } from "./MessageContext";
+import { MessageContext } from "../MessageContext";
 import DrinkButton from "./DrinkButton";
 
 const DrinkRow = ({ drink }) => {

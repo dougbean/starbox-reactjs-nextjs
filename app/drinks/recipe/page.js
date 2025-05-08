@@ -31,7 +31,7 @@ const DrinksRecipe = () => {
     
     deleteData(url).then(
       function(value) {
-        //console.log(value);
+        //console.log(value);       
         toast.success('Item deleted successfully!');
       },
       function(error) {        

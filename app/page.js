@@ -1,7 +1,7 @@
 "use client";
 // import { ApiContext } from "./components/ApiContext";
 // import {fetchItemById} from "./components/ApiService";
-import Drinks from "./components/Drinks";
+import Drinks from "./components/drinks/Drinks";
 
 //I probably don't need the context provider for the api service. 
 // export default function Page() {  

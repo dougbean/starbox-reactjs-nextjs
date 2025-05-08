@@ -1,6 +1,6 @@
-import { useContext } from 'react'; //todo: remove, I think.   
-import { ApiContext } from "./ApiContext"; //todo: remove, I think.   
-import {fetchItemById, updateData} from "../components/ApiService";
+// import { useContext } from 'react'; //todo: remove, I think.   
+// import { ApiContext } from "./ApiContext"; //todo: remove, I think.   
+import {fetchItemById, updateData} from "../../components/ApiService";
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const DrinkButton = ({ drink, setMessage }) => {
