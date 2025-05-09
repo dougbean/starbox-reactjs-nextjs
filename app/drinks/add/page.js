@@ -11,17 +11,15 @@ const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const AddDrink = () => {  
     const [formData, setFormData] = useState({id: 0, name: '', price: 0, ingredients: []});
-    const { ingredients, loadingState  } = useIngredients();  
-    
     const [message, setMessage] = useState(''); //validation message  
-    
+    const { ingredients, loadingState } = useIngredients();     
+       
     if (loadingState !== loadingStatus.loaded){
         return <LoadingIndicator loadingState={loadingState} />;
     }
 
     const handleChange = (e) => {   
-      const { name, value } = e.target;
-      console.log(name, value)
+      const { name, value } = e.target;     
   
       setFormData(prevState => ({
         ...prevState,
@@ -46,6 +44,7 @@ const AddDrink = () => {
         setFormData(updatedFormData);
     };
     
+    //id of selected ingredient
     const handleDropdownChange = (index, event) => {
         setMessage('')
         const updatedFormData = {...formData};
@@ -55,6 +54,7 @@ const AddDrink = () => {
         setFormData(updatedFormData);
     };
     
+    //ingredient quantity change
     const handleTextChange = (index, event) => {    
         const updatedFormData = {...formData};
         const { ingredients } = updatedFormData;
@@ -90,14 +90,12 @@ const AddDrink = () => {
               
         const url = `${baseUrl}/Drinks`;
         createData(url, formData).then(
-        function(value) {
-            console.log(value);
+        function(value) {            
             toast.success('Item created successfully!');
             //reset form
             setFormData({id: 0, name: '', price: 0, ingredients: []});
         },
-        function(error) {        
-            console.log(error);   
+        function(error) {                    
             toast.error("error occurred creating ingredient.");   
         }
       );  

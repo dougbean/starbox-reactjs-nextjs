@@ -28,7 +28,7 @@ export default class Utils {
           return [...duplicates]; 
        } 
 
-       static checkIngredientsForDuplicates = (selectedIngredients) => {
+      static checkIngredientsForDuplicates = (selectedIngredients) => {
           let hasDuplicates = false;
           let dupes = Utils.#getDuplicatedIngredients(selectedIngredients);
           console.log(dupes);
@@ -39,4 +39,20 @@ export default class Utils {
           } 
           return hasDuplicates;
       }
+
+      // //sort//
+      static sortListByName = (listToSort) => {       
+        listToSort.sort((a, b) => {
+          if (a.name.toLowerCase() < b.name.toLowerCase()) {      
+            return -1;  // a comes before b
+          } else if (a.name.toLowerCase() > b.name.toLowerCase()) {        
+            return 1;   // b comes before a
+          } else {        
+            return 0;   // a and b are equal
+          }
+        });
+        return listToSort;
+      } 
+      // //sort//
+
   }
