@@ -43,18 +43,16 @@ const AddDrink = () => {
         updatedFormData.ingredients = ingredients; 
         setFormData(updatedFormData);
     };
-    
-    //id of selected ingredient
+        
     const handleDropdownChange = (index, event) => {
         setMessage('')
         const updatedFormData = {...formData};
         const { ingredients } = updatedFormData;
-        ingredients[index].id = event.target.value; 
+        ingredients[index].id = Number(event.target.value); 
         updatedFormData.ingredients = ingredients; 
         setFormData(updatedFormData);
     };
-    
-    //ingredient quantity change
+        
     const handleTextChange = (index, event) => {    
         const updatedFormData = {...formData};
         const { ingredients } = updatedFormData;
@@ -67,25 +65,12 @@ const AddDrink = () => {
         event.preventDefault();   
       
         //validation//     
-        const { ingredients: selectedIngredients } = formData;       
-        
-        if(selectedIngredients.length === 0){       
-          setMessage('one ingredient is required.');
-          return;
-        }      
+        const { ingredients: selectedIngredients } = formData;  
 
-        let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
-
-        if(!areSelectionsValid){
-          setMessage('Ingredient selection is not valid.');        
-          return;
+        const isValid = isSubmissionValid(selectedIngredients);              
+        if(!isValid){
+           return;
         }
-
-        const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
-        if(hasDuplicates){     
-          setMessage('You have a duplicate ingredient selection. Please change one.');  
-          return;
-        }      
         //validation//
               
         const url = `${baseUrl}/Drinks`;
@@ -100,6 +85,28 @@ const AddDrink = () => {
         }
       );  
     };
+       
+    const isSubmissionValid = (selectedIngredients) => {  
+
+        if(selectedIngredients.length === 0){       
+          setMessage('one ingredient is required.');
+          return false;          
+        }      
+
+        let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
+
+        if(!areSelectionsValid){
+          setMessage('Ingredient selection is not valid.');        
+          return false;
+        }
+
+        const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
+        if(hasDuplicates){     
+          setMessage('You have a duplicate ingredient selection. Please change one.');  
+          return false;
+        }  
+        return true;    
+    };        
 
     return (    
        <>  

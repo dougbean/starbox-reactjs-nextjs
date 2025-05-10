@@ -19,9 +19,9 @@ export default class Utils {
 
         selectedIngredients.forEach(function(item) {            
             if (seen.has(item.id)) {              
-              duplicates.add(item.id.toString());
+              duplicates.add(item.id);
             } else {
-              seen.add(item.id.toString());        
+              seen.add(item.id);        
             }     
           })
 
@@ -39,8 +39,7 @@ export default class Utils {
           } 
           return hasDuplicates;
       }
-
-      // //sort//
+      
       static sortListByName = (listToSort) => {       
         listToSort.sort((a, b) => {
           if (a.name.toLowerCase() < b.name.toLowerCase()) {      
@@ -53,6 +52,4 @@ export default class Utils {
         });
         return listToSort;
       } 
-      // //sort//
-
   }

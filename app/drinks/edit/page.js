@@ -53,12 +53,12 @@ const DrinkForm = () => {
       updatedFormData.ingredients = ingredients; 
       setFormData(updatedFormData);
     };
-  
+
     const handleDropdownChange = (index, event) => {
       setMessage('')
       const updatedFormData = {...formData};
       const { ingredients } = updatedFormData;
-      ingredients[index].id = event.target.value; 
+      ingredients[index].id = Number(event.target.value); 
       updatedFormData.ingredients = ingredients; 
       setFormData(updatedFormData);
     };
@@ -75,39 +75,68 @@ const DrinkForm = () => {
         event.preventDefault();
        
         //validation//          
-        const { ingredients: selectedIngredients } = formData;       
-            
-        if(selectedIngredients.length === 0){       
-            setMessage('one ingredient is required.');
-            return;
+        const { ingredients: selectedIngredients } = formData; 
+
+        const isValid = isSubmissionValid(selectedIngredients);              
+        if(!isValid){
+           return;
         }
+                
+        // if(selectedIngredients.length === 0){       
+        //     setMessage('one ingredient is required.');
+        //     return;
+        // }
       
-        let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
+        // let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
       
-        if(!areSelectionsValid){
-            setMessage('Ingredient selection is not valid.');        
-            return;
-        }
+        // if(!areSelectionsValid){
+        //     setMessage('Ingredient selection is not valid.');        
+        //     return;
+        // }
       
-        const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
-        if(hasDuplicates){     
-            setMessage('You have a duplicate ingredient selection. Please change one.');  
-            return;
-        }            
+        // //there is a bug here on the edit page.
+        // const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
+        // if(hasDuplicates){     
+        //     setMessage('You have a duplicate ingredient selection. Please change one.');  
+        //     return;
+        // }            
         //validation//       
        
         const url = `${baseUrl}/Drinks/${formData.id}`;    
         updateData(url, formData).then(
-            function(value) {
-            console.log(value);
-            toast.success('Item updated successfully!');
-            },
-            function(error) {        
-            console.log(error);   
-            toast.error("error occurred updating ingredient.");   
-            }
+          function(value) {
+             // console.log(value);
+             toast.success('Item updated successfully!');
+           },
+          function(error) {        
+             //console.log(error);   
+             toast.error("error occurred updating ingredient.");   
+           }
         );    
-    };   
+    };  
+    
+    //todo: move this repeated code to Util class
+     const isSubmissionValid = (selectedIngredients) => {  
+    
+            if(selectedIngredients.length === 0){       
+              setMessage('one ingredient is required.');
+              return false;          
+            }      
+    
+            let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
+    
+            if(!areSelectionsValid){
+              setMessage('Ingredient selection is not valid.');        
+              return false;
+            }
+    
+            const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
+            if(hasDuplicates){     
+              setMessage('You have a duplicate ingredient selection. Please change one.');  
+              return false;
+            }  
+            return true;    
+        };        
  
     return (    
        <>  
