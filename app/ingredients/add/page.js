@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const IngredientForm = () => {
-    //use state for the form//
+  
     const [formData, setFormData] = useState({
       id: 0,
       name: '',
@@ -14,41 +14,35 @@ const IngredientForm = () => {
       amount: 0
     });
 
-    const handleChange = (e) => {
-      console.log(e.target)
+    const handleChange = (e) => {     
       const { name, value } = e.target;
-      console.log(name, value)
-
+      
       setFormData(prevState => ({
         ...prevState,
         [name]: value
       }));
-    };
-  //use state for the form//
+    }; 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();   
-    console.log('Form submitted:', formData);
-    // Call the API to add the ingredient
-    //const url = 'https://localhost:7070/api/Ingredients'; // todo: get base url from config
-    const url = `${baseUrl}/Ingredients`;
-    createData(url, formData).then(
-      function(value) {
-        console.log(value);
-        toast.success('Item created successfully!');
-        //reset form
-        setFormData({     
-          name: '',
-          unitCost: 0,
-          amount: 0
-        });
-      },
-      function(error) {        
-        console.log(error);   
-        toast.error("error occurred creating ingredient.");   
-      }
-    );  
-  };
+    const handleSubmit = (event) => {
+      event.preventDefault();   
+    
+      // Call the API to add the ingredient   
+      const url = `${baseUrl}/Ingredients`;
+      createData(url, formData).then(
+        function(value) {      
+          toast.success('Item created successfully!');
+          //reset form
+          setFormData({     
+            name: '',
+            unitCost: 0,
+            amount: 0
+          });
+        },
+        function(error) {    
+          toast.error("error occurred creating ingredient.");   
+        }
+      );  
+    };
 
   return (
     <>

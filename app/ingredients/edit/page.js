@@ -6,44 +6,33 @@ import {useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-//todo: move this to the component and use the formData directly
-const handleSubmit = (event) => {
-    event.preventDefault(); 
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-    console.log('Form submitted:', data);
-    // Call the API to add the ingredient
-    //const url = `https://localhost:7070/api/Ingredients/${data.id}`; // todo: get base url from config
-    const url = `${baseUrl}/Ingredients/${data.id}`;
-    console.log(url)
-    console.log(JSON.stringify(data))
-    updateData(url, data).then(
-      function(value) {
-        console.log(value);
-        toast.success('Item updated successfully!');
-      },
-      function(error) {        
-        console.log(error);   
-        toast.error("error occurred updating ingredient.");   
-      }
-    );    
-};
-
 const IngredientForm = () => {        
     const searchParams = useSearchParams()
-    const ingredientData = JSON.parse(atob(searchParams.get('data'))); // decode the base64 string
-    console.log(ingredientData); 
+    const ingredientData = JSON.parse(atob(searchParams.get('data'))); // decode the base64 string   
        
     const [formData, setFormData] = useState(ingredientData);
 
     const handleChange = (e) => {   
-      const { name, value } = e.target;
-      console.log(name, value)
+      const { name, value } = e.target;      
   
       setFormData(prevState => ({
         ...prevState,
         [name]: value
       }));      
+    };
+   
+    const handleSubmit = (event) => {
+        event.preventDefault();       
+        // Call the API to edit the ingredient     
+        const url = `${baseUrl}/Ingredients/${formData.id}`;    
+        updateData(url, formData).then(
+          function(value) {
+            toast.success('Item updated successfully!');
+          },
+          function(error) { 
+            toast.error("error occurred updating ingredient.");   
+          }
+        );    
     };
    
     return (    
@@ -58,17 +47,15 @@ const IngredientForm = () => {
           readOnly
           onChange={handleChange} 
           required className="form-control" />
-        </div>
-    
-      {/* <div className="row mb-3"> */}
+        </div>    
+     
         <div className="col-md-6">
           <label htmlFor="name" className="form-label">Name:</label>
           <input type="text" id="name" name="name"  
           value={formData.name} 
           onChange={handleChange} 
           required className="form-control" />
-        </div>
-      {/* </div> */}
+        </div>      
          
         <div className="col-md-6">
           <label htmlFor="unitCost" className="form-label">Unit Cost:</label>
