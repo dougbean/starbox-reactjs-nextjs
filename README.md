@@ -10,7 +10,7 @@ The requirements document is here - https://github.com/dougbean/StarboxNet8CoreA
 
 I followed the requirements more or less, though I used .NET for the back end rather than Ruby on Rails or Groovy on Grails.
 
-The requirements document is a code challange presented to job applications of my former employer. I did it originally to practice and to learn new technologies, such as Angular and React.
+The requirements document is a code challange presented to job applications of my former employer. I did it to practice and to learn new technologies, such as Angular and React.
 
 I commented out the line in the .gitignore file that would prevent .env files from being added to github, so I could checkin hte .env.local file which contains the baseUrl for the .NET web api.
 
