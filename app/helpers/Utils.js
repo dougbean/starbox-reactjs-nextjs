@@ -4,8 +4,9 @@ export default class Utils {
     static checkIngredientSelections = (selectedIngredients) => {
         let areSelectionsValid = true;
         
-        selectedIngredients.forEach(function (item) {
-          if (item.id === '') {            
+        selectedIngredients.forEach(function (item) {        
+          //'Select and ingredient' is an empty string on the Add Drink page and zero on the Edit Drink page.      
+          if (item.id === '' || item.id === 0) {              
             areSelectionsValid = false;           
           }
         });
@@ -51,5 +52,27 @@ export default class Utils {
           }
         });
         return listToSort;
-      } 
+      }
+
+      static isSubmissionValid = (selectedIngredients) => {  
+          
+        if(selectedIngredients.length === 0){       
+          //setMessage('one ingredient is required.');
+          return {isValid: false, message: 'one ingredient is required.'};          
+        }      
+          
+        let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
+          
+        if(!areSelectionsValid){
+        //setMessage('Ingredient selection is not valid.');        
+          return {isValid: false, message: 'Ingredient selection is not valid.'};    
+        }
+          
+        const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
+        if(hasDuplicates){     
+        //setMessage('You have a duplicate ingredient selection. Please change one.');  
+          return {isValid: false, message: 'You have a duplicate ingredient selection. Please change one.'};    
+        }  
+        return {isValid: true, message: ''};    
+     };        
   }
