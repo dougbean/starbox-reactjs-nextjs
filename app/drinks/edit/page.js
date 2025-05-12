@@ -83,84 +83,18 @@ const DrinkForm = () => {
            setMessage(message);
            return;
         }
-                
-        // if(selectedIngredients.length === 0){       
-        //     setMessage('one ingredient is required.');
-        //     return;
-        // }
-      
-        // let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
-      
-        // if(!areSelectionsValid){
-        //     setMessage('Ingredient selection is not valid.');        
-        //     return;
-        // }
-      
-        // //there is a bug here on the edit page.
-        // const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
-        // if(hasDuplicates){     
-        //     setMessage('You have a duplicate ingredient selection. Please change one.');  
-        //     return;
-        // }            
         //validation//       
        
         const url = `${baseUrl}/Drinks/${formData.id}`;    
         updateData(url, formData).then(
-          function(value) {
-             // console.log(value);
+          function(value) {             
              toast.success('Item updated successfully!');
            },
-          function(error) {        
-             //console.log(error);   
+          function(error) {  
              toast.error("error occurred updating ingredient.");   
            }
         );    
     };  
-    
-    // //todo: move this repeated code to Util class
-    //  const isSubmissionValid = (selectedIngredients) => {  
-    
-    //         if(selectedIngredients.length === 0){       
-    //           setMessage('one ingredient is required.');
-    //           return false;          
-    //         }      
-    
-    //         let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
-    
-    //         if(!areSelectionsValid){
-    //           setMessage('Ingredient selection is not valid.');        
-    //           return false;
-    //         }
-    
-    //         const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
-    //         if(hasDuplicates){     
-    //           setMessage('You have a duplicate ingredient selection. Please change one.');  
-    //           return false;
-    //         }  
-    //         return true;    
-    //     };       
-    
-    //  const isSubmissionValid = (selectedIngredients) => {  
-    
-    //         if(selectedIngredients.length === 0){       
-    //           //setMessage('one ingredient is required.');
-    //           return {isValid: false, message: 'one ingredient is required.'};          
-    //         }      
-    
-    //         let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
-    
-    //         if(!areSelectionsValid){
-    //           //setMessage('Ingredient selection is not valid.');        
-    //           return {isValid: false, message: 'Ingredient selection is not valid.'};    
-    //         }
-    
-    //         const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
-    //         if(hasDuplicates){     
-    //           //setMessage('You have a duplicate ingredient selection. Please change one.');  
-    //           return {isValid: false, message: 'You have a duplicate ingredient selection. Please change one.'};    
-    //         }  
-    //         return {isValid: true, message: ''};    
-    //   };        
  
     return (    
        <>  

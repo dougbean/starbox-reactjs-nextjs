@@ -54,23 +54,21 @@ export default class Utils {
         return listToSort;
       }
 
+      //validate drink submission
       static isSubmissionValid = (selectedIngredients) => {  
           
-        if(selectedIngredients.length === 0){       
-          //setMessage('one ingredient is required.');
+        if(selectedIngredients.length === 0){     
           return {isValid: false, message: 'one ingredient is required.'};          
         }      
           
         let areSelectionsValid = Utils.checkIngredientSelections(selectedIngredients);
           
-        if(!areSelectionsValid){
-        //setMessage('Ingredient selection is not valid.');        
+        if(!areSelectionsValid){          
           return {isValid: false, message: 'Ingredient selection is not valid.'};    
         }
           
         const hasDuplicates = Utils.checkIngredientsForDuplicates(selectedIngredients);
         if(hasDuplicates){     
-        //setMessage('You have a duplicate ingredient selection. Please change one.');  
           return {isValid: false, message: 'You have a duplicate ingredient selection. Please change one.'};    
         }  
         return {isValid: true, message: ''};    
