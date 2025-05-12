@@ -12,5 +12,13 @@ I followed the requirements more or less, though I used .NET for the back end ra
 
 The requirements document is a code challange presented to job applications of my former employer. I did it originally to practice and to learn new technologies, such as Angular and React.
 
+I commented out the line in the .gitignore file that would prevent .env files from being added to github, so I could checkin hte .env.local file which contains the baseUrl for the .NET web api.
 
-Run npm install to install the node packages.
+# .env.local
+NEXT_PUBLIC_API_BASE_URL=https://localhost:7070/api
+
+Run 'npm install' to install the node packages.
+
+Run 'npm run dev' to run the react appliction. 
+
+It runs on - http://localhost:3000
