@@ -63,6 +63,7 @@ const deleteData = async (url) => {
     }
 
     const data = await response.text(); // Use response.text() if no JSON body is returned  
+    return data;
   } catch (error) {
     console.error('Error in DELETE request:', error);
     throw error; 

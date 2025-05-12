@@ -27,7 +27,7 @@ export default function Page() {
   const handleClick = (id) => {
     const url = `${baseUrl}/Ingredients/${id}`;
     deleteData(url).then(
-      function(value) {        
+      function(value) {          
         toast.success('Item deleted successfully!');
       },
       function(error) {                   
@@ -76,7 +76,7 @@ export default function Page() {
         <form onSubmit={handleSubmit}>
             <div className="row mb-3">
                 <div className="col-md-4">
-                    <label htmlFor="amount" className="form-label">specify amount for ingredients restock</label>
+                    <label htmlFor="amount" className="form-label">Specify amount for ingredients restock</label>                    
                 </div>
                 <div className="col-md-8">
                     <input type="number" id="amount" name="amount"
